@@ -36,5 +36,15 @@ public class CalculatorTest {
 	public void should_return_sum_for_string_with_multiple_numbers_delimited_by_comma() {
 		assertThat(calculator.add("4,5,9,1"), is(19));
 	}
+	
+	@Test
+	public void should_return_sum_for_string_with_numbers_delimited_by_newline() {
+		assertThat(calculator.add("1\n2\n3"), is(6));
+	}
+	
+	@Test
+	public void should_return_sum_for_string_with_numbers_delimited_by_comma_and_newline() {
+		assertThat(calculator.add("1\n2,3"), is(6));
+	}
 
 }

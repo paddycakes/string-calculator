@@ -52,5 +52,13 @@ class CalculatorSpec extends Specification {
 			"8,1,12,4"   | 25
 			"2,5,7,11,3" | 28
 	}
+	
+	def "should return sum for string with_numbers delimited by comma and newline"() {
+		when:
+			def sum = calculator.add("1\n2,3")
+			
+		then:
+			sum == 6
+	}
 
 }
