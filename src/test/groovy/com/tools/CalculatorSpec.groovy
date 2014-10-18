@@ -41,5 +41,16 @@ class CalculatorSpec extends Specification {
 			"2,1" | 3
 			"0,15"| 15
 	}
+	
+	def "should return sum for string with multiple numbers delimited by comma"(String input, int sum) {
+		expect:
+			calculator.add(input) == sum
+
+		where:
+			input        | sum
+			"4,5,9"      | 18
+			"8,1,12,4"   | 25
+			"2,5,7,11,3" | 28
+	}
 
 }
