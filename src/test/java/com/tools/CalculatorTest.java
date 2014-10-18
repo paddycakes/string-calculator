@@ -26,5 +26,10 @@ public class CalculatorTest {
 	public void should_return_number_for_single_number_string() {
 		assertThat(calculator.add("1"), is(1));
 	}
+	
+	@Test
+	public void should_return_sum_for_string_with_two_numbers_delimited_by_comma() {
+		assertThat(calculator.add("1,2"), is(3));
+	}
 
 }
