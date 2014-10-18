@@ -3,12 +3,9 @@ package com.tools;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
 /**
@@ -16,7 +13,7 @@ import com.google.common.collect.Lists;
  */
 public class Calculator {
 	
-	private static final Function<String, Integer> STRING_TO_INT_TRANSFORMER = new Function<String,Integer>() { 
+	private static final Function<String,Integer> STRING_TO_INT_TRANSFORMER = new Function<String,Integer>() { 
 		@Override public Integer apply(String number) { 
         	return parseInt(number);
         }

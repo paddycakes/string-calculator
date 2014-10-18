@@ -29,19 +29,23 @@ public class Validator {
 	
 	public List<Integer> validate() {
 		validateNonNegativeInvariant(values);
-		List<Integer> validated = filterOperandsGreaterThan1000(values);
+		List<Integer> validated = validateAllOperandsEqualOrLessThan1000(values);
 		return validated;		
 	}
 
 	private void validateNonNegativeInvariant(List<Integer> operands) {
-		Collection<Integer> negativeOperands = Collections2.filter(operands, IS_NEGATIVE);
-		if (negativeOperands.size() > 0) {
+		Collection<Integer> filteredOperands = Collections2.filter(operands, IS_NEGATIVE);
+		if (hasNegative(filteredOperands)) {
 			throw new IllegalArgumentException(
-					buildNegativeOperandExceptionMessage(negativeOperands));
+					buildNegativeOperandExceptionMessage(filteredOperands));
 		}
 	}
 
-	private List<Integer> filterOperandsGreaterThan1000(List<Integer> operands) {
+	private boolean hasNegative(Collection<Integer> operands) {
+		return operands.size() > 0;
+	}
+
+	private List<Integer> validateAllOperandsEqualOrLessThan1000(List<Integer> operands) {
 		Collection<Integer> filtered = Collections2.filter(operands, IS_1000_OR_LESS);
 		return new ArrayList<Integer>(filtered);
 	}
