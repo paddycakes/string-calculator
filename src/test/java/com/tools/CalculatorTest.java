@@ -51,5 +51,10 @@ public class CalculatorTest {
 	public void should_return_sum_for_string_with_custom_delimiter_defined_at_start() {
 		assertThat(calculator.add("//;\n1;2"), is(3));
 	}
+	
+	@Test
+	public void should_return_sum_for_string_where_custom_delimiter_is_regex_meta_character() {
+		assertThat(calculator.add("//^\n5^2^2^1"), is(10));
+	}
 
 }

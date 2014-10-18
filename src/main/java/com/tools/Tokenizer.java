@@ -10,7 +10,7 @@ public class Tokenizer {
 	private static final String OR = "|";
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String STANDARD_DELIMITERS_REGEX = COMMA_DELIMITER + OR + NEW_LINE_DELIMITER;
-	private static final String CUSTOM_DELIMITER_AND_NUMBER_GROUPS_RETEX = "//(.)\n(.*)";
+	private static final String CUSTOM_DELIMITER_AND_NUMBER_GROUPS_REGEX = "//(.)\n(.*)";
 	private static final int DELIMITER_GROUP_INDEX = 1;
 	private static final int NUMBER_GROUP_INDEX = 2;
 	
@@ -32,11 +32,15 @@ public class Tokenizer {
 	}
 	
 	private String[] splitUsingCustomDelimiter(String sequence) {
-		Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_AND_NUMBER_GROUPS_RETEX).matcher(sequence);
+		Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_AND_NUMBER_GROUPS_REGEX).matcher(sequence);
 		matcher.matches();
-		String delimiter = matcher.group(DELIMITER_GROUP_INDEX);
+		String customDelimiter = escapeRegexMetaCharacters(matcher.group(DELIMITER_GROUP_INDEX));
 		String numberSequence = matcher.group(NUMBER_GROUP_INDEX);
-		return split(numberSequence, delimiter);
+		return split(numberSequence, customDelimiter);
+	}
+
+	private String escapeRegexMetaCharacters(String sequence) {
+		return Pattern.quote(sequence);
 	}
 	
 	private String[] split(String sequence, String delimiterRegex) {

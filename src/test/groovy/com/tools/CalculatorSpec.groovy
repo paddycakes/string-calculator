@@ -74,4 +74,15 @@ class CalculatorSpec extends Specification {
 			"//!\n9!5!12!3"  | 29
 	}
 	
+	def "should return sum for string where custom delimiter is a regex meta character"() {
+		expect:
+		calculator.add(input) == sum
+
+	where:
+		input            | sum
+		"//^\n1^2^3"     | 6
+		"//.\n9.5.3"     | 17
+		"//+\n7+1+1"     | 9
+	}
+	
 }
