@@ -56,5 +56,10 @@ public class CalculatorTest {
 	public void should_return_sum_for_string_where_custom_delimiter_is_regex_meta_character() {
 		assertThat(calculator.add("//^\n5^2^2^1"), is(10));
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void should_throw_illegal_argument_exception_when_passed_string_containing_negative_numbers() {
+		calculator.add("2,-5,7,-1");
+	}
 
 }

@@ -22,16 +22,16 @@ public class Tokenizer {
 	
 	public String[] tokenize() {
 		if (haCustomDelimiter(input)) {
-			return splitUsingCustomDelimiter(input);
+			return tokenizeUsingCustomDelimiter(input);
 		}
-		return splitUsingStandardDelimiters(input);
+		return tokenizeUsingStandardDelimiters(input);
 	}
 	
-	private String[] splitUsingStandardDelimiters(String sequence) {
+	private String[] tokenizeUsingStandardDelimiters(String sequence) {
 		return split(sequence, STANDARD_DELIMITERS_REGEX);
 	}
 	
-	private String[] splitUsingCustomDelimiter(String sequence) {
+	private String[] tokenizeUsingCustomDelimiter(String sequence) {
 		Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_AND_NUMBER_GROUPS_REGEX).matcher(sequence);
 		matcher.matches();
 		String customDelimiter = escapeRegexMetaCharacters(matcher.group(DELIMITER_GROUP_INDEX));

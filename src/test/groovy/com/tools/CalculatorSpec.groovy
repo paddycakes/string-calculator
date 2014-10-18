@@ -85,4 +85,22 @@ class CalculatorSpec extends Specification {
 		"//+\n7+1+1"     | 9
 	}
 	
+	def "should throw IllegalArgumentException when add is passed a string containing a single negative number"() {
+		when:
+			calculator.add("-5")
+		
+		then:
+			IllegalArgumentException e = thrown()
+			e.message == "Negatives now allowed: -5"
+	}
+	
+	def "should throw IllegalArgumentException when add is passed a string containing a both negative and positive numbers"() {
+		when:
+			calculator.add("7,-5,-2,9")
+		
+		then:
+			IllegalArgumentException e = thrown()
+			e.message == "Negatives now allowed: -5 -2"
+	}
+	
 }
