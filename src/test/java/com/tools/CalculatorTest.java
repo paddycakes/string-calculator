@@ -61,5 +61,10 @@ public class CalculatorTest {
 	public void should_throw_illegal_argument_exception_when_passed_string_containing_negative_numbers() {
 		calculator.add("2,-5,7,-1");
 	}
+	
+	@Test
+	public void should_ignore_all_numbers_greater_than_1000_in_input_string() {
+		assertThat(calculator.add("2,1001,5,500,2014"), is(507));
+	}
 
 }

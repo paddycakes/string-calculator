@@ -22,17 +22,13 @@ public class Calculator {
         }
     };
     
-    private static final Predicate<Integer> IS_NEGATIVE = new Predicate<Integer>() {
-		@Override public boolean apply(Integer number) {
-			return number < 0;
-		}
-	};
 
 	public int add(String input) {
 		if (input.isEmpty()) {
 			return 0;
 		} else {
 			List<Integer> operands = parseOperands(input);
+			operands = validateOperands(operands);
 			return addOperands(operands);
 		}
 	}
@@ -40,10 +36,8 @@ public class Calculator {
 	private List<Integer> parseOperands(String input) {
 		String[] numbers = tokenize(input);
 		List<Integer> operands = transformStringsToIntegers(numbers);
-		validateNonNegativeInvariant(operands);
 		return operands;
 	}
-
 	private String[] tokenize(String sequence) {
 		return new Tokenizer(sequence).tokenize();
 	}
@@ -52,29 +46,16 @@ public class Calculator {
 		return Lists.transform(asList(numbers), STRING_TO_INT_TRANSFORMER);
 	}
 	
+	private List<Integer> validateOperands(List<Integer> operands) {
+		return new Validator(operands).validate();
+	}
+	
 	private int addOperands(List<Integer> operands) {
 		int sum = 0;
 		for (Integer operand : operands) {
 			sum += operand;
 		}
 		return sum;
-	}
-	
-	private void validateNonNegativeInvariant(List<Integer> operands) {
-		Collection<Integer> negativeOperands = Collections2.filter(operands, IS_NEGATIVE);
-		if (negativeOperands.size() > 0) {
-			throw new IllegalArgumentException(
-					buildNegativeOperandExceptionMessage(negativeOperands));
-		}
-	}
-
-	private String buildNegativeOperandExceptionMessage(Collection<Integer> negativeOperands) {
-		StringBuilder sb = new StringBuilder("Negatives now allowed:");
-		for (Integer negativeOperand : negativeOperands) {
-			sb.append(" ");
-			sb.append(negativeOperand);
-		}
-		return sb.toString();
 	}
 
 }
