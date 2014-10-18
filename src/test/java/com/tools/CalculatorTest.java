@@ -43,8 +43,13 @@ public class CalculatorTest {
 	}
 	
 	@Test
-	public void should_return_sum_for_string_with_numbers_delimited_by_comma_and_newline() {
+	public void should_return_sum_for_string_with_numbers_delimited_by_both_comma_and_newline() {
 		assertThat(calculator.add("1\n2,3"), is(6));
+	}
+	
+	@Test
+	public void should_return_sum_for_string_with_custom_delimiter_defined_at_start() {
+		assertThat(calculator.add("//;\n1;2"), is(3));
 	}
 
 }

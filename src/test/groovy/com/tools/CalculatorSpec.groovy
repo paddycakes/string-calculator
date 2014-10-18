@@ -1,5 +1,7 @@
 package com.tools
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import spock.lang.Specification
 
 class CalculatorSpec extends Specification {
@@ -53,12 +55,23 @@ class CalculatorSpec extends Specification {
 			"2,5,7,11,3" | 28
 	}
 	
-	def "should return sum for string with_numbers delimited by comma and newline"() {
+	def "should return sum for string with_numbers delimited by both comma and newline"() {
 		when:
 			def sum = calculator.add("1\n2,3")
 			
 		then:
 			sum == 6
 	}
+	
+	def "should return sum for string with custom delimiter defined at start"() {
+		expect:
+			calculator.add(input) == sum
 
+		where:
+			input            | sum
+			"//;\n1;2"       | 3
+			"//@\n15@5@25"   | 45
+			"//!\n9!5!12!3"  | 29
+	}
+	
 }
