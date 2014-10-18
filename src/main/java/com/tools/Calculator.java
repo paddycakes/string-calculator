@@ -1,13 +1,25 @@
 package com.tools;
 
 import static java.lang.Integer.parseInt;
+import static java.util.Arrays.asList;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+
+/**
+ * Add Javadoc.
+ */
 public class Calculator {
 
 	private static final String COMMA_DELIMITER = ",";
+	
+	private Function<String, Integer> stringToIntTransformer = new Function<String,Integer>() { 
+        public Integer apply(String number) { 
+        	return parseInt(number);
+        }
+    };
 
 	public int add(String input) {
 		if (input.isEmpty()) {
@@ -28,15 +40,12 @@ public class Calculator {
 
 	private List<Integer> parseOperands(String input) {
 		String[] numbers = input.split(COMMA_DELIMITER);
-		List<Integer> operands = new ArrayList<>(numbers.length);
-		for (int i=0; i<numbers.length; i++) {
-			operands.add(convertToInt(numbers[i]));
-		}
+		List<Integer> operands = transformStringsToIntegers(numbers);
 		return operands;
 	}
 
-	private int convertToInt(String number) {
-		return parseInt(number);
+	private List<Integer> transformStringsToIntegers(String[] numbers) {
+		return Lists.transform(asList(numbers), stringToIntTransformer);
 	}
 
 }
