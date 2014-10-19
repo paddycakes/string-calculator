@@ -57,6 +57,10 @@ Test reports can be found at:
 
 	build/reports/tests/index.html
 
+Example screenshot:
+
+![Test Results](/images/test-output.png "Test Results")
+
 Main application acceptance tests can be found in:
 
 	*** TODO ***
