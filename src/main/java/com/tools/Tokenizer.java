@@ -5,14 +5,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Tokenizer to split input string by a 
+ * standard of custom delimiter.
+ */
 public class Tokenizer {
 	
 	private static final String COMMA_DELIMITER = ",";
 	private static final String NEW_LINE_DELIMITER = "\n";
 	private static final String OR = "|";
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
-	private static final String STANDARD_DELIMITERS_REGEX = COMMA_DELIMITER + OR + NEW_LINE_DELIMITER;
-	private static final String CUSTOM_DELIMITER_AND_NUMBER_GROUPS_REGEX = "//(.|\\[(.*)\\])\n(.*)";
+	private static final String STANDARD_DELIMITERS_REGEX = COMMA_DELIMITER + OR + NEW_LINE_DELIMITER;	
+	private static final String CUSTOM_DELIMITER_AND_NUMBER_GROUPS_REGEX = "//(.|\\[(.*)\\])\n(.*)";	
 	private static final int GROUP_INDEX_ONE = 1;
 	private static final int GROUP_INDEX_TWO = 2;	
 	private static final int NUMBER_GROUP_INDEX = 3;
@@ -23,6 +27,11 @@ public class Tokenizer {
 		this.input = ensureInputInvariants(input);
 	}
 
+	/**
+	 * Tokenizes input string.
+	 * 
+	 * @return String array containing the split tokens.
+	 */
 	public String[] tokenize() {
 		if (haCustomDelimiter(input)) {
 			return tokenizeUsingCustomDelimiter(input);
@@ -43,7 +52,7 @@ public class Tokenizer {
 		return split(numberSequence, customDelimiter);
 	}
 
-	private int getDelimiterIndex(Matcher matcher) {
+	private int getDelimiterIndex(Matcher matcher) {	
 		return matcher.group(GROUP_INDEX_TWO) != null ? GROUP_INDEX_TWO : GROUP_INDEX_ONE;
 	}
 

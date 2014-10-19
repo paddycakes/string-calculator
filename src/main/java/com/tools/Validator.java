@@ -8,9 +8,15 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
+/**
+ * Ensures that all input values conform to
+ * required validations.
+ */
 public class Validator {
 	
-    private static final Predicate<Integer> IS_NEGATIVE = new Predicate<Integer>() {
+    private static final String SPACE = " ";
+
+	private static final Predicate<Integer> IS_NEGATIVE = new Predicate<Integer>() {
 		@Override public boolean apply(Integer number) {
 			return number < 0;
 		}
@@ -28,6 +34,11 @@ public class Validator {
 		this.values = ensureNonNullInvariant(values);
 	}
 
+	/**
+	 * Validates that all input values meet required invariants.
+	 * 
+	 * @return List of values that meet required invariants.
+	 */
 	public List<Integer> validate() {
 		validateNonNegativeInvariant(values);
 		List<Integer> validated = validateAllOperandsEqualOrLessThan1000(values);
@@ -54,7 +65,7 @@ public class Validator {
 	private String buildNegativeOperandExceptionMessage(Collection<Integer> negativeOperands) {
 		StringBuilder sb = new StringBuilder("Negatives now allowed:");
 		for (Integer negativeOperand : negativeOperands) {
-			sb.append(" ");
+			sb.append(SPACE);
 			sb.append(negativeOperand);
 		}
 		return sb.toString();

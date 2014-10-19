@@ -9,7 +9,8 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 /**
- * Add Javadoc.
+ * A calculator that will perform arithmetic
+ * operations on string based inputs.
  */
 public class Calculator {
 	
@@ -19,7 +20,12 @@ public class Calculator {
         }
     };
     
-
+    /**
+     * Adds the numbers contained in the input string.
+     * 
+     * @param Input string to sum.
+     * @return Value of the summed string.
+     */
 	public int add(String input) {
 		List<Integer> operands = parseOperands(input);
 		operands = validateOperands(operands);

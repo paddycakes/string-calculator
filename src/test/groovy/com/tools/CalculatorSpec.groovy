@@ -128,5 +128,4 @@ class CalculatorSpec extends Specification {
 			"//[!!!!]\n5!!!!6"    | 11
 	}
 	
-	
 }
