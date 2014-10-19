@@ -10,18 +10,15 @@ public class Tokenizer {
 	private static final String OR = "|";
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	private static final String STANDARD_DELIMITERS_REGEX = COMMA_DELIMITER + OR + NEW_LINE_DELIMITER;
-	private static final String CUSTOM_DELIMITER_AND_NUMBER_GROUPS_REGEX = "//(.)\n(.*)";
-	private static final int DELIMITER_GROUP_INDEX = 1;
-	private static final int NUMBER_GROUP_INDEX = 2;
+	private static final String CUSTOM_DELIMITER_AND_NUMBER_GROUPS_REGEX = "//(.|\\[(.*)\\])\n(.*)";
+	private static final int GROUP_INDEX_ONE = 1;
+	private static final int GROUP_INDEX_TWO = 2;	
+	private static final int NUMBER_GROUP_INDEX = 3;
 	
 	private final String input;
 
 	public Tokenizer(String input) {
 		this.input = emptyStringEqualToZeroInvariant(input);
-	}
-	
-	private String emptyStringEqualToZeroInvariant(String input) {
-		return input.isEmpty() ? "0" : input;
 	}
 
 	public String[] tokenize() {
@@ -38,9 +35,14 @@ public class Tokenizer {
 	private String[] tokenizeUsingCustomDelimiter(String sequence) {
 		Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_AND_NUMBER_GROUPS_REGEX).matcher(sequence);
 		matcher.matches();
-		String customDelimiter = escapeRegexMetaCharacters(matcher.group(DELIMITER_GROUP_INDEX));
+		int delimiterIndex = getDelimiterIndex(matcher);
+		String customDelimiter = escapeRegexMetaCharacters(matcher.group(delimiterIndex));
 		String numberSequence = matcher.group(NUMBER_GROUP_INDEX);
 		return split(numberSequence, customDelimiter);
+	}
+
+	private int getDelimiterIndex(Matcher matcher) {
+		return matcher.group(GROUP_INDEX_TWO) != null ? GROUP_INDEX_TWO : GROUP_INDEX_ONE;
 	}
 
 	private String escapeRegexMetaCharacters(String sequence) {
@@ -53,6 +55,10 @@ public class Tokenizer {
 	
 	private boolean haCustomDelimiter(String input) {
 		return input.startsWith(CUSTOM_DELIMITER_PREFIX);
+	}
+	
+	private String emptyStringEqualToZeroInvariant(String input) {
+		return input.isEmpty() ? "0" : input;
 	}
 
 }

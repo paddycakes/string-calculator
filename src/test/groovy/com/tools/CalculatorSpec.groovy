@@ -2,6 +2,9 @@ package com.tools
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
 import spock.lang.Specification
 
 class CalculatorSpec extends Specification {
@@ -114,6 +117,16 @@ class CalculatorSpec extends Specification {
 		"1001"               | 0
 	}
 	
+	def "should allow custom delimiters of any length"() {
+		expect:
+		calculator.add(input) == sum
+
+	where:
+		input                 | sum
+		"//[***]\n1***2***3"  | 6
+		"//[&&]\n5&&4&&3"     | 12
+		"//[!!!!]\n5!!!!6"    | 11
+	}
 	
 	
 }
