@@ -17,9 +17,13 @@ public class Tokenizer {
 	private final String input;
 
 	public Tokenizer(String input) {
-		this.input = input;
+		this.input = emptyStringEqualToZeroInvariant(input);
 	}
 	
+	private String emptyStringEqualToZeroInvariant(String input) {
+		return input.isEmpty() ? "0" : input;
+	}
+
 	public String[] tokenize() {
 		if (haCustomDelimiter(input)) {
 			return tokenizeUsingCustomDelimiter(input);

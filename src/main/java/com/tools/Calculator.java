@@ -21,13 +21,9 @@ public class Calculator {
     
 
 	public int add(String input) {
-		if (input.isEmpty()) {
-			return 0;
-		} else {
-			List<Integer> operands = parseOperands(input);
-			operands = validateOperands(operands);
-			return addOperands(operands);
-		}
+		List<Integer> operands = parseOperands(input);
+		operands = validateOperands(operands);
+		return addOperands(operands);
 	}
 
 	private List<Integer> parseOperands(String input) {

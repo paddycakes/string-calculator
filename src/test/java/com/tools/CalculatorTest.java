@@ -64,7 +64,12 @@ public class CalculatorTest {
 	
 	@Test
 	public void should_ignore_all_numbers_greater_than_1000_in_input_string() {
-		assertThat(calculator.add("2,1001,5,500,2014"), is(507));
+		assertThat(calculator.add("2,1001"), is(2));
 	}
+	
+/*	@Test
+	public void should_allow_custom_delimiters_of_any_length() {
+		assertThat(calculator.add("//[***]\n1***2***3"), is(6));
+	}*/
 
 }
