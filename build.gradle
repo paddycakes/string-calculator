@@ -3,6 +3,9 @@ apply plugin: "groovy"
 apply plugin: "application"
 apply plugin: "eclipse"
 
+mainClassName = 'com.tools.Calculator'
+applicationName = 'calculator'
+
 sourceCompatibility = '1.7'
 
 repositories {
