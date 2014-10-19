@@ -1,6 +1,7 @@
 package com.tools;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
 import java.util.List;
@@ -56,5 +57,21 @@ public class Calculator {
 		}
 		return sum;
 	}
+	
+    /**
+     * Main method to allow the Calculator
+     * to be run as an application.
+     */
+    public static void main(String[] args) {
+    	if (args.length != 1) {
+    		throw new IllegalStateException(
+    				"Must specify a single input string to sum");
+    	}
+    	String input = args[0];
+    	Calculator calculator = new Calculator();
+    	System.out.println(
+    			format("The sum of adding input string '%s' is %d", 
+    			input, calculator.add(input)));
+    }
 
 }
