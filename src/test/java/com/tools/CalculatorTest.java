@@ -71,5 +71,6 @@ public class CalculatorTest {
 	public void should_allow_custom_delimiters_of_any_length() {
 		assertThat(calculator.add("//[***]\n1***2***3"), is(6));
 	}
-
+	
+	
 }
