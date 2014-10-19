@@ -108,24 +108,24 @@ class CalculatorSpec extends Specification {
 	
 	def "should ignore all numbers greater than 1000 in input string"() {
 		expect:
-		calculator.add(input) == sum
+			calculator.add(input) == sum
 
-	where:
-		input                | sum
-		"2,1001,5,500,2014"  | 507
-		"99,1000,1001"       | 1099
-		"1001"               | 0
+		where:
+			input                | sum
+			"2,1001,5,500,2014"  | 507
+			"99,1000,1001"       | 1099
+			"1001"               | 0
 	}
 	
 	def "should allow custom delimiters of any length"() {
 		expect:
-		calculator.add(input) == sum
+			calculator.add(input) == sum
 
-	where:
-		input                 | sum
-		"//[***]\n1***2***3"  | 6
-		"//[&&]\n5&&4&&3"     | 12
-		"//[!!!!]\n5!!!!6"    | 11
+		where:
+			input                 | sum
+			"//[***]\n1***2***3"  | 6
+			"//[&&]\n5&&4&&3"     | 12
+			"//[!!!!]\n5!!!!6"    | 11
 	}
 	
 	

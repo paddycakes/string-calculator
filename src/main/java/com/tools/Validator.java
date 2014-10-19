@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 
@@ -24,9 +25,9 @@ public class Validator {
 	private final List<Integer> values;
 
 	public Validator(List<Integer> values) {
-		this.values = values;
+		this.values = ensureNonNullInvariant(values);
 	}
-	
+
 	public List<Integer> validate() {
 		validateNonNegativeInvariant(values);
 		List<Integer> validated = validateAllOperandsEqualOrLessThan1000(values);
@@ -57,6 +58,10 @@ public class Validator {
 			sb.append(negativeOperand);
 		}
 		return sb.toString();
+	}
+	
+	private List<Integer> ensureNonNullInvariant(List<Integer> values) {
+		return Preconditions.checkNotNull(values, "Values to be validated cannot be null.");
 	}
 
 }

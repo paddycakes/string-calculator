@@ -8,7 +8,7 @@ class TokenizerSpec extends Specification {
 	
 	def tokenizer
 	
-	def "should tokenize an empty string and return an array with a single '0' string element"() {
+	def "should ensure empty string equal to '0' invariant if input string passed to constructor is empty"() {
 		given:
 			tokenizer = new Tokenizer(EMPTY_STRING)
 			
@@ -18,6 +18,15 @@ class TokenizerSpec extends Specification {
 		then:
 			numbers.size() == 1
 			numbers[0] == "0"
+	}
+	
+	def "should ensure non-null invariant if input string passed to constructor is null"() {
+		when:
+			tokenizer = new Tokenizer(null)
+			
+		then:
+			NullPointerException e = thrown()
+			e.message == "Input to be tokenized cannot be null."
 	}
 	
 	def "should tokenize input strings and return multi number string arrays"(String input, String[] tokens) {

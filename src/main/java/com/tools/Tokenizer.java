@@ -1,5 +1,7 @@
 package com.tools;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,7 +20,7 @@ public class Tokenizer {
 	private final String input;
 
 	public Tokenizer(String input) {
-		this.input = emptyStringEqualToZeroInvariant(input);
+		this.input = ensureInputInvariants(input);
 	}
 
 	public String[] tokenize() {
@@ -55,6 +57,16 @@ public class Tokenizer {
 	
 	private boolean haCustomDelimiter(String input) {
 		return input.startsWith(CUSTOM_DELIMITER_PREFIX);
+	}
+	
+	private String ensureInputInvariants(String input) {
+		String invariant = ensureNonNullInvariant(input);
+		invariant = emptyStringEqualToZeroInvariant(input);
+		return invariant;
+	}
+	
+	private String ensureNonNullInvariant(String input) {
+		return checkNotNull(input, "Input to be tokenized cannot be null.");
 	}
 	
 	private String emptyStringEqualToZeroInvariant(String input) {
