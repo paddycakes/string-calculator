@@ -59,7 +59,7 @@ Test reports can be found at:
 
 Example screenshot:
 
-![Test Results](https://bitbucket.org/paddycakes/string-calculator/src/7fd0e10313d2ecf1632182a2553f19ded2970065/images/test-output.png "Test Results")
+![Test Results](https://github.com/paddycakes/string-calculator/blob/master/images/test-output.png)
 
 Main application acceptance tests can be found in:
 
