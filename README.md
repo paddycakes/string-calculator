@@ -46,7 +46,7 @@ I have provided a JUnit acceptance test suite in the following class:
 
 	com.tools.CalculatorTest
 
-However, I have written most of the tests using a BDD approach using Spock. Spock is a developer testing and specification framework for Java and Groovy applications. It provides a very powerful and expressive specification language through the power of a Groovy DSL. One of it's power features, and one which I have used extensively in this kata, is the ability it affords for data driven testing. Often it is useful to exercise the same test code multiple times, with varying inputs and expected results. Spock’s data driven testing support makes this extremely easy:
+However, I have written most of the tests using a BDD approach using Spock. Spock is a developer testing and specification framework for Java and Groovy applications. It provides a very powerful and expressive specification language through the power of a Groovy DSL. Spock specifications conventionally have the suffix 'Spec'. One of it's power features, and one which I have used extensively in this kata, is the ability it affords for data driven testing. Often it is useful to exercise the same test code multiple times, with varying inputs and expected results. Spock’s data driven testing support makes this extremely easy. For example, in CalculatorSpec:
 
 ```
 def "should allow custom delimiters of any length"() {
