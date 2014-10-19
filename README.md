@@ -59,7 +59,7 @@ Test reports can be found at:
 
 Example screenshot:
 
-![Test Results](/images/test-output.png "Test Results")
+![Test Results](images/test-output.png "Test Results")
 
 Main application acceptance tests can be found in:
 
