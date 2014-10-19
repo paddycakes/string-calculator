@@ -40,8 +40,26 @@ http://www.gradle.org/docs/current/userguide/gradle_wrapper.html
 
 The Gradle Wrapper is a batch script on Windows or a shell script on *nix. When you start a Gradle build via the wrapper, Gradle will be automatically downloaded and used to run the build. This provides the benefit that anyone can work with it without needing to install Gradle beforehand. It also ensures that users are guaranteed to use the version of Gradle that the build was designed to work with.
 
-TODO - PUT NOTE ABOUT USE OF SPOCK FOR BDD TESTING AND HOW TO RUN AND WHERE TEST REPORTS
+## Spock for BDD Testing
 
+I have provided a JUnit acceptance test suite in the following class:
+
+	com.tools.CalculatorTest
+
+However, I have written most of the tests using a BDD approach using Spock. Spock is a developer testing and specification framework for Java and Groovy applications. It provides a very powerful and expressive specification language through the power of a Groovy DSL. One of it's power features, and one which I have used extensively in this kata, is the ability it affords for data driven testing. Often it is useful to exercise the same test code multiple times, with varying inputs and expected results. Spock’s data driven testing support makes this extremely easy:
+
+```
+def "should allow custom delimiters of any length"() {
+	expect:
+		calculator.add(input) == sum
+
+	where:
+		input                 | sum
+		"//[***]\n1***2***3"  | 6
+		"//[&&]\n5&&4&&3"     | 12
+		"//[!!!!]\n5!!!!6"    | 11
+}
+```
 
 ## Build Tasks
 
@@ -61,31 +79,6 @@ Example screenshot:
 
 ![Test Results](https://github.com/paddycakes/string-calculator/blob/master/images/test-output.png)
 
-Main application acceptance tests can be found in:
-
-	*** TODO ***
-
-Source code also contains a suite of unit tests and some supporting test utilities in the package:
-
-	net.tools.search.utils
-
-### Running application
-
-Firstly, install the application
-
-	./gradlew installApp
-	
-Then navigate to
-
-	build/install/calculator
-
-and execute on Unix
-
-	./bin/calculator
-
-or on Windows
-
-	./bin/calculator.bat
 	
 ### Creating a distribution
 
